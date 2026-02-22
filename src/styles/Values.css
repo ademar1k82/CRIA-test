@@ -1,0 +1,10 @@
+.values {
+  width: 100%;
+  min-height: 600px;
+}
+
+@media (max-width: 768px) {
+  .values {
+    min-height: 500px;
+  }
+}

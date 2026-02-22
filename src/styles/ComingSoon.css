@@ -1,0 +1,99 @@
+/* ===========================
+   ESTILOS COMING SOON
+   =========================== */
+
+.coming-soon {
+  padding: 6rem 20px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.coming-soon-content {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  color: white;
+}
+
+.coming-soon h2 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.coming-soon p {
+  font-size: 1.3rem;
+  margin-bottom: 4rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-velocity-container {
+  margin: 3rem 0;
+}
+
+.coming-soon-text {
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.notify-btn {
+  background-color: white;
+  color: var(--color-primary);
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.notify-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.notify-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .coming-soon {
+    padding: 4rem 20px;
+    min-height: 600px;
+  }
+
+  .coming-soon h2 {
+    font-size: 2.5rem;
+  }
+
+  .coming-soon p {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+
+  .scroll-velocity-container {
+    margin: 2rem 0;
+  }
+
+  .notify-btn {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem;
+  }
+}

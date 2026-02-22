@@ -1,0 +1,36 @@
+/* ===========================
+   ESTILOS PLANNER
+   =========================== */
+
+.planner {
+  padding: 4rem 20px;
+  background-color: var(--color-light);
+}
+
+.planner h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--color-dark);
+  text-align: center;
+}
+
+.planner p {
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--color-text);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .planner {
+    padding: 2rem 20px;
+  }
+
+  .planner h2 {
+    font-size: 2rem;
+  }
+
+  .planner p {
+    font-size: 1rem;
+  }
+}

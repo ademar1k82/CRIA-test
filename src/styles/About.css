@@ -1,0 +1,23 @@
+/* ===========================
+   ESTILOS ABOUT (CIRCULAR GALLERY)
+   =========================== */
+
+.about {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  cursor: grab;
+  padding: 0;
+  margin: 0;
+}
+
+.about:active {
+  cursor: grabbing;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .about {
+    height: 500px;
+  }
+}

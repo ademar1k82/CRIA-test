@@ -1,0 +1,58 @@
+/* ===========================
+   ESTILOS LIBRARY
+   =========================== */
+
+.library {
+  padding: 4rem 20px;
+  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-white) 100%);
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.library-content {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+.library h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.library p {
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 3rem;
+}
+
+.library-icons {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .library {
+    padding: 2rem 20px;
+    min-height: auto;
+  }
+
+  .library h2 {
+    font-size: 2rem;
+  }
+
+  .library p {
+    font-size: 1rem;
+  }
+
+  .library-icons {
+    margin: 0 auto;
+  }
+}
