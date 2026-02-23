@@ -4,7 +4,7 @@
 
 .planner {
   padding: 4rem 20px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: linear-gradient(135deg, var(--color-light) 0%, var(--color-white) 100%);
   min-height: 800px;
   display: flex;
   align-items: center;
