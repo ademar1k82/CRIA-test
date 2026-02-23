@@ -10,7 +10,8 @@ function FlowingMenu({
   bgColor = '#060010',
   marqueeBgColor = '#fff',
   marqueeTextColor = '#060010',
-  borderColor = '#fff'
+  borderColor = '#fff',
+  onItemClick = null
 }) {
   return (
     <div className="menu-wrap" style={{ backgroundColor: bgColor }}>
@@ -24,6 +25,7 @@ function FlowingMenu({
             marqueeBgColor={marqueeBgColor}
             marqueeTextColor={marqueeTextColor}
             borderColor={borderColor}
+            onItemClick={onItemClick}
           />
         ))}
       </nav>
@@ -31,14 +33,28 @@ function FlowingMenu({
   )
 }
 
-function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marqueeTextColor, borderColor }) {
+function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marqueeTextColor, borderColor, onItemClick, p }) {
   const itemRef = useRef(null)
   const marqueeRef = useRef(null)
   const marqueeInnerRef = useRef(null)
   const animationRef = useRef(null)
   const [repetitions, setRepetitions] = useState(4)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+  const [marqueeVisible, setMarqueeVisible] = useState(window.innerWidth <= 768)
 
   const animationDefaults = { duration: 0.6, ease: 'expo' }
+
+  // Detectar mobile e mostrar marquee sempre em mobile
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+      setMarqueeVisible(mobile)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const findClosestEdge = (mouseX, mouseY, width, height) => {
     const topEdgeDist = distMetric(mouseX, mouseY, width / 2, 0)
@@ -62,8 +78,9 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
       const contentWidth = marqueeContent.offsetWidth
       const viewportWidth = window.innerWidth
 
-      const needed = Math.ceil(viewportWidth / contentWidth) + 2
-      setRepetitions(Math.max(4, needed))
+      // Ensure we have enough repetitions to fill viewport on both sides with larger gap
+      const needed = Math.ceil((viewportWidth * 3) / contentWidth)
+      setRepetitions(Math.max(15, needed))
     }
 
     calculateRepetitions()
@@ -85,15 +102,27 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
         animationRef.current.kill()
       }
 
+      // Duration calcula-se pela largura do conteúdo dividida pela velocidade
+      const durationPerPixel = 1 / speed
+      const duration = contentWidth * durationPerPixel
+
+      // Start from x: 0 (fully visible) and animate one full cycle
+      gsap.set(marqueeInnerRef.current, { x: 0 })
+      
       animationRef.current = gsap.to(marqueeInnerRef.current, {
         x: -contentWidth,
-        duration: speed,
+        duration: duration,
         ease: 'none',
-        repeat: -1
+        repeat: -1,
+        repeatDelay: 0,
+        onRepeat: () => {
+          gsap.set(marqueeInnerRef.current, { x: 0 })
+        }
       })
     }
 
-    const timer = setTimeout(setupMarquee, 50)
+    // Ensure DOM is ready before measuring
+    const timer = setTimeout(setupMarquee, 100)
 
     return () => {
       clearTimeout(timer)
@@ -104,6 +133,7 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
   }, [text, image, repetitions, speed])
 
   const handleMouseEnter = ev => {
+    if (isMobile) return // Mobile não precisa de hover effect
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return
     const rect = itemRef.current.getBoundingClientRect()
     const x = ev.clientX - rect.left
@@ -118,6 +148,7 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
   }
 
   const handleMouseLeave = ev => {
+    if (isMobile) return // Mobile não precisa de hover effect
     if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return
     const rect = itemRef.current.getBoundingClientRect()
     const x = ev.clientX - rect.left
@@ -135,14 +166,29 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
       <a
         className="menu__item-link"
         href={link}
+        onClick={(e) => {
+          e.preventDefault()
+          if (onItemClick) {
+            onItemClick({ text, image, p })
+          }
+        }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{ color: textColor }}
       >
         {text}
       </a>
-      <div className="marquee" ref={marqueeRef} style={{ backgroundColor: marqueeBgColor }}>
-        <div className="marquee__inner-wrap">
+      
+      {isMobile ? (
+        // Mobile: Static display without animation - text only
+        <div className="marquee marquee--static" style={{ backgroundColor: marqueeBgColor }}>
+          <div className="marquee__static-content" style={{ color: marqueeTextColor }}>
+            <span>{text}</span>
+          </div>
+        </div>
+      ) : (
+        // Desktop: Animated marquee
+        <div className={`marquee`} ref={marqueeRef} style={{ backgroundColor: marqueeBgColor }}>
           <div className="marquee__inner" ref={marqueeInnerRef} aria-hidden="true">
             {[...Array(repetitions)].map((_, idx) => (
               <div className="marquee__part" key={idx} style={{ color: marqueeTextColor }}>
@@ -152,7 +198,7 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
             ))}
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

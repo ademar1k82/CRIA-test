@@ -105,6 +105,7 @@ function VelocityText({
 export const ScrollVelocity = ({
   scrollContainerRef,
   texts = [],
+  items = [],
   velocity = 100,
   className = '',
   damping = 50,
@@ -116,9 +117,24 @@ export const ScrollVelocity = ({
   parallaxStyle,
   scrollerStyle
 }) => {
+  const renderContent = (content) => {
+    if (Array.isArray(content)) {
+      // É um array de partes com tamanhos diferentes
+      return content.map((part, idx) => (
+        <span key={idx} className={`text-${part.size}`}>
+          {part.text}&nbsp;
+        </span>
+      ))
+    }
+    // É um texto simples
+    return content + '\u00A0'
+  }
+
+  const dataToRender = items.length > 0 ? items : texts
+
   return (
     <section>
-      {texts.map((text, index) => (
+      {dataToRender.map((data, index) => (
         <VelocityText
           key={index}
           className={className}
@@ -133,7 +149,7 @@ export const ScrollVelocity = ({
           parallaxStyle={parallaxStyle}
           scrollerStyle={scrollerStyle}
         >
-          {text}&nbsp;
+          {renderContent(data)}
         </VelocityText>
       ))}
     </section>

@@ -1,29 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FlowingMenu from './FlowingMenu'
+import valuesData from '../data/values.json'
+
 import '../styles/Values.css'
 
 export default function Values() {
-  const demoItems = [
-    { link: '#', text: 'Mojave', image: 'https://picsum.photos/600/400?random=1' },
-    { link: '#', text: 'Sonoma', image: 'https://picsum.photos/600/400?random=2' },
-    { link: '#', text: 'Monterey', image: 'https://picsum.photos/600/400?random=3' },
-    { link: '#', text: 'Sequoia', image: 'https://picsum.photos/600/400?random=4' },
-    { link: '#', text: 'Ventura', image: 'https://picsum.photos/600/400?random=5' }
-  ]
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
+
+  const handleItemClick = (item) => {
+    setSelectedItem(item)
+    setIsModalOpen(true)
+    setIsClosing(false)
+    document.body.style.overflow = 'hidden'
+  }
+
+  const handleCloseModal = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setIsModalOpen(false)
+      document.body.style.overflow = 'auto'
+      setTimeout(() => setSelectedItem(null), 50)
+    }, 400)
+  }
 
   return (
     <section className="values" id="values">
-      <div style={{ height: '600px', position: 'relative' }}>
-        <FlowingMenu 
-          items={demoItems}
-          speed={15}
-          textColor="#ffffff"
-          bgColor="#060010"
-          marqueeBgColor="#ffffff"
-          marqueeTextColor="#060010"
-          borderColor="#ffffff"
-        />
+      <div className="values-header">
+        <h2>O que fazemos</h2>
+        <h1>Iniciativas & Ações</h1>
+        <p className="values-header-subtitle">(clica nos títulos para saber mais)</p>
       </div>
+      <FlowingMenu 
+        items={valuesData}
+        speed={25}
+        textColor="#ffffff"
+        bgColor="transparent"
+        marqueeBgColor="#07b2d9"
+        marqueeTextColor="#ffffff"
+        borderColor="rgba(255, 255, 255, 0.2)"
+        onItemClick={handleItemClick}
+      />
+
+      {isModalOpen && selectedItem && (
+        <div className={`values-modal-overlay ${isModalOpen && !isClosing ? 'open' : ''} ${isClosing ? 'closing' : ''}`} onClick={handleCloseModal}>
+          <div className="values-modal" onClick={(e) => e.stopPropagation()}>
+            <div 
+              className="values-modal-bg" 
+              style={{ backgroundImage: `url(${selectedItem.image})` }}
+            ></div>
+            <div className="values-modal-content">
+              <h1>{selectedItem.text}</h1>
+              <p>{selectedItem.p}</p>
+              <button className="values-modal-btn" onClick={handleCloseModal}>
+                Voltar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

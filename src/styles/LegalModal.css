@@ -1,0 +1,254 @@
+.blog-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  animation: fadeOverlayIn 0.3s ease-out;
+}
+
+.blog-modal-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.blog-modal-content {
+  position: relative;
+  background: linear-gradient(135deg, rgba(1, 15, 50, 0.95) 0%, rgba(0, 60, 140, 0.85) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideModalIn 0.3s ease-out;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              inset 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.blog-modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background: rgba(7, 178, 217, 0.2);
+  border: 1px solid rgba(7, 178, 217, 0.3);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 1001;
+}
+
+.blog-modal-close:hover {
+  background: rgba(7, 178, 217, 0.4);
+  border-color: rgba(7, 178, 217, 0.6);
+  transform: rotate(90deg);
+}
+
+.blog-modal-header {
+  margin-bottom: 2rem;
+  border-bottom: 2px solid rgba(7, 178, 217, 0.3);
+  padding-bottom: 1.5rem;
+}
+
+.blog-modal-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.blog-modal-main-title {
+  flex: 1;
+}
+
+.blog-modal-main-title h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.blog-modal-body {
+  margin-top: 1.5rem;
+}
+
+.blog-modal-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  word-break: break-word;
+}
+
+.blog-modal-text p {
+  margin: 1.2rem 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.blog-modal-text h3 {
+  color: #07B2D9;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.blog-modal-text ul {
+  margin: 1rem 0;
+  padding-left: 2rem;
+  list-style: disc;
+}
+
+.blog-modal-text li {
+  margin: 0.8rem 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.blog-modal-text a {
+  color: #07B2D9;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.blog-modal-text a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Scrollbar Styling */
+.blog-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.blog-modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.blog-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(7, 178, 217, 0.4);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.blog-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(7, 178, 217, 0.6);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .blog-modal-content {
+    padding: 2rem 1.5rem;
+    width: 95%;
+    border-radius: 15px;
+  }
+
+  .blog-modal-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2em;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .blog-modal-main-title h2 {
+    font-size: 1.6rem;
+  }
+
+  .blog-modal-text {
+    font-size: 1rem;
+  }
+
+  .blog-modal-text h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-modal-content {
+    padding: 1.5rem 1.2rem;
+    width: 95%;
+    max-height: 90vh;
+    border-radius: 12px;
+  }
+
+  .blog-modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+
+  .blog-modal-main-title h2 {
+    font-size: 1.4rem;
+  }
+
+  .blog-modal-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .blog-modal-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .blog-modal-text p {
+    margin: 1rem 0;
+  }
+
+  .blog-modal-text h3 {
+    font-size: 1.1rem;
+    margin: 1.2rem 0 0.8rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideModalOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+}

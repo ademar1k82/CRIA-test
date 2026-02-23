@@ -1,55 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react'
+import eventsData from '../data/events.json'
 import '../styles/EventCalendar.css'
 
 export default function EventCalendar() {
   const [selectedEvent, setSelectedEvent] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [eventsListHeight, setEventsListHeight] = useState('auto')
+  const [imageKey, setImageKey] = useState(0)
+  const [touchStart, setTouchStart] = useState(0)
   const eventsListRef = useRef(null)
   const carouselRef = useRef(null)
 
-  const events = [
-    {
-      id: 1,
-      title: 'Workshop Inovação Digital',
-      location: 'Auditório Principal',
-      address: 'Rua da Inovação, nº 123',
-      description: 'Descubra as tendências mais recentes em transformação digital e inteligência artificial.',
-      image: 'https://picsum.photos/600/800?random=1'
-    },
-    {
-      id: 2,
-      title: 'Conferência de Design',
-      location: 'Sala de Conferências',
-      address: 'Av. do Design, nº 456',
-      description: 'Explore os principios fundamentais do design moderno e user experience.',
-      image: 'https://picsum.photos/600/800?random=2'
-    },
-    {
-      id: 3,
-      title: 'Hackathon de Desenvolvimento',
-      location: 'Laboratório Tech',
-      address: 'Av. Tecnológica, nº 789',
-      description: 'Desafio de 48 horas para desenvolvedores criarem soluções inovadoras.',
-      image: 'https://picsum.photos/600/800?random=3'
-    },
-    {
-      id: 4,
-      title: 'Networking Profissional',
-      location: 'Espaço Social',
-      address: 'Rua Central, nº 321',
-      description: 'Conecte-se com profissionais da indústria e expanda sua rede de contatos.',
-      image: 'https://picsum.photos/600/800?random=4'
-    },
-    {
-      id: 5,
-      title: 'Palestra sobre IA',
-      location: 'Auditório Sul',
-      address: 'Av. Futuro, nº 555',
-      description: 'Inteligência Artificial: Oportunidades e desafios para o futuro.',
-      image: 'https://picsum.photos/600/800?random=5'
-    }
-  ]
+  const events = eventsData
 
   const eventsPerPage = 4
   const totalPages = Math.ceil(events.length / eventsPerPage)
@@ -91,21 +53,65 @@ export default function EventCalendar() {
 
   const handleMobileBulletClick = (index) => {
     setSelectedEvent(index)
+    setImageKey(prev => prev + 1)
     if (carouselRef.current) {
       const itemWidth = carouselRef.current.offsetWidth
-      carouselRef.current.scrollLeft = index * itemWidth
+      carouselRef.current.scrollTo({
+        left: index * itemWidth,
+        behavior: 'smooth'
+      })
     }
+  }
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX)
+  }
+
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return
+    const touchEnd = e.changedTouches[0].clientX
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe && selectedEvent < events.length - 1) {
+      const newIndex = selectedEvent + 1
+      setSelectedEvent(newIndex)
+      setImageKey(prev => prev + 1)
+      if (carouselRef.current) {
+        carouselRef.current.scrollTo({
+          left: newIndex * carouselRef.current.offsetWidth,
+          behavior: 'smooth'
+        })
+      }
+    }
+
+    if (isRightSwipe && selectedEvent > 0) {
+      const newIndex = selectedEvent - 1
+      setSelectedEvent(newIndex)
+      setImageKey(prev => prev + 1)
+      if (carouselRef.current) {
+        carouselRef.current.scrollTo({
+          left: newIndex * carouselRef.current.offsetWidth,
+          behavior: 'smooth'
+        })
+      }
+    }
+
+    setTouchStart(0)
   }
 
   return (
     <section className="planner" id="planner">
       <div className="planner-content">
-        <h2>Calendário de Atividades</h2>
-        <p>Acompanhe os eventos e atividades da instituição CRIA</p>
+        <h2>Agenda</h2>
+        <h1>Calendário de Eventos</h1>
 
+        {/* TODO: Dados dummy - comentado até que haja eventos reais */}
+        {/*
         <div className="events-container">
           {/* Eventos à esquerda */}
-          <div className="events-wrapper">
+          {/*<div className="events-wrapper">
             <div className="events-list" ref={eventsListRef}>
               {paginatedEvents.map((event, index) => {
                 const actualIndex = currentPage * eventsPerPage + index
@@ -113,12 +119,16 @@ export default function EventCalendar() {
                   <div
                     key={event.id}
                     className={`event-card ${selectedEvent === actualIndex ? 'active' : ''}`}
-                    onClick={() => setSelectedEvent(actualIndex)}
+                    onClick={() => {
+                      setSelectedEvent(actualIndex)
+                      setImageKey(prev => prev + 1)
+                    }}
                   >
                     <h3>{event.title}</h3>
                     <div className="event-info">
                       <p><strong>Local:</strong> {event.location}</p>
                       <p><strong>Morada:</strong> {event.address}</p>
+                      <p><strong>Data:</strong> {event.date}</p>
                     </div>
                     <p className="event-description">{event.description}</p>
                   </div>
@@ -127,7 +137,7 @@ export default function EventCalendar() {
             </div>
 
             {/* Bullets de paginação - Desktop */}
-            {totalPages > 1 && (
+            {/*{totalPages > 1 && (
               <div className="pagination-desktop">
                 <div className="pagination-dots">
                   {Array.from({ length: totalPages }).map((_, idx) => (
@@ -144,14 +154,19 @@ export default function EventCalendar() {
           </div>
 
           {/* Poster à direita - Desktop */}
-          <div className="event-poster" style={{ height: eventsListHeight }}>
-            <img src={currentEvent.image} alt={currentEvent.title} />
+          {/*<div className="event-poster" style={{ height: eventsListHeight }}>
+            <img key={imageKey} src={currentEvent.image} alt={currentEvent.title} />
           </div>
         </div>
 
         {/* Carousel de posteres - Mobile */}
-        <div className="mobile-carousel-wrapper">
-          <div className="mobile-carousel" ref={carouselRef}>
+        {/*<div className="mobile-carousel-wrapper">
+          <div 
+            className="mobile-carousel" 
+            ref={carouselRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {events.map((event) => (
               <div
                 key={event.id}
@@ -163,7 +178,7 @@ export default function EventCalendar() {
           </div>
           
           {/* Bullets - Mobile */}
-          <div className="pagination-mobile">
+          {/*<div className="pagination-mobile">
             {events.map((_, idx) => (
               <button
                 key={idx}
@@ -173,6 +188,13 @@ export default function EventCalendar() {
               />
             ))}
           </div>
+        </div>
+        */}
+
+        {/* Placeholder - Sem eventos */}
+        <div className="no-events-placeholder">
+          <i className="fa-solid fa-gear loading-gear"></i>
+          <p>Sem eventos ainda definidos.</p>
         </div>
       </div>
     </section>

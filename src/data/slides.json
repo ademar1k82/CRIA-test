@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "image": "https://res.cloudinary.com/deoditzdz/image/upload/v1751621578/objeto-f_dfxevn.png",
+    "title": "A nossa missão",
+    "h3": "Quem Somos",
+    "p": "Procuramos CRIAR uma comunidade inclusiva e solidária, que valoriza a diversidade, promove a equidade e garante oportunidades iguais para todos. Apoiar quem vive com a diferença no seu dia a dia na descoberta e celebração dos seus pontos fortes e trabalhar em conjunto para que na diversidade cada um atinja o seu potencial único e máximo construindo em conjunto um mundo mais inclusivo e respeitador."
+  },
+  {
+    "id": 2,
+    "image": "https://res.cloudinary.com/deoditzdz/image/upload/v1751621572/missao-valores-f_rehz1f.png",
+    "title": "A nossa visão",
+    "h3": "Quem Somos",
+    "p": "Uma sociedade que respeita, acolhe e integra cada pessoa, reconhecendo a sua individualidade e potencial. Todos, independentemente das capacidades, raça ou credo merecemos o apoio necessário para prosperar e contribuir com uma vida produtiva na comunidade."
+  },
+  {
+    "id": 3,
+    "image": "https://res.cloudinary.com/deoditzdz/image/upload/v1751621575/normalizar-f_ceerzz.png",
+    "title": "Os nossos valores",
+    "h3": "Quem Somos",
+    "p": [
+            "• Respeito pela dignidade humana",
+            "• Inclusão e equidade",
+            "• Solidariedade e cooperação",
+            "• Empoderamento e participação",
+            "• Inovação e criatividade",
+            "• Futuro"
+        ]  
+  },
+  {
+    "id": 4,
+    "image": "https://res.cloudinary.com/deoditzdz/image/upload/v1751621555/area-f_gl8fn6.png",
+    "title": "A nossa história",
+    "h3": "Quem Somos",
+    "p": "A CRIA nasceu em 2025, no Porto, fruto da vontade de famílias, profissionais e comunidade em unir forças pela inclusão social. Somos uma associação sem fins lucrativos, de caráter social, educativo e comunitário, aberta a todos os que acreditam que uma sociedade mais justa e participativa é construída dos pequenos gestos de todos e de cada um."
+  }
+]

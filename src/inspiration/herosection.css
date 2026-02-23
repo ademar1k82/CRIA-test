@@ -1,0 +1,320 @@
+.home {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #07B2D9;
+    scroll-margin-top: 100px;
+    overflow: visible !important;
+    padding: 0;
+}
+
+.home::before {
+    z-index: 2;
+    content: '';
+    position: absolute;
+    background: rgba(3, 96, 251, 0.1);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.home .content {
+    z-index: 3;
+    color: #fff;
+    width: calc(100% - 400px);
+    position: absolute;
+    left: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+.home .content h1{
+    font-size: 4em;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    line-height: 75px;
+    margin-bottom: 40px;
+    margin-top: 120px;
+}
+
+.home .content h3{
+    font-size: 2em;
+    font-weight: 600;
+    line-height: 50px;
+}
+
+.home .content p {
+    margin-bottom: 0;
+    text-align: left;
+    font-size: 1.2em;
+    max-width: 800px;
+}
+
+.home .content .hero-buttons {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 180px;
+}
+
+.home .content .cta-button {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    background: rgba(3, 120, 166, 0.6);
+    border: 2px solid rgba(3, 120, 166, 0.8);
+    border-radius: 10px;
+    padding: 15px 30px;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.home .content .cta-button:hover {
+    background: rgba(3, 120, 166, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.home .content .cta-button:active {
+    transform: translateY(1px);
+}
+
+.home .media-icons{
+    z-index: 3;
+    position: absolute;
+    right: 200px;
+    top: 35%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s ease;
+}
+
+.home .media-icons a{
+    color: #fff;
+    font-size:2.5em;
+    transition: 0.3s ease;
+}
+
+.home .media-icons a:not(:last-child){
+    margin-bottom: 20px;
+}
+
+.home .media-icons a:hover{
+    transform: scale(1.3);
+}
+
+.home video{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    object-fit: cover;
+}
+
+@keyframes showContentHero {
+    to {
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+.home .content h3,
+.home .content h1,
+.home .content p {
+    transform: translateY(30px);
+    filter: blur(20px);
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.home .content.active h3 {
+    animation: showContentHero 0.4s 0.4s forwards;
+}
+.home .content.active h1 {
+    animation: showContentHero 0.4s 0.6s forwards;
+}
+.home .content.active p {
+    animation: showContentHero 0.4s 0.8s forwards;
+}
+
+.admin-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.admin-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.admin-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.admin-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1040px) {
+    .home .content {
+        width: calc(100% - 160px);
+        left: 80px;
+    }
+
+    .home .media-icons{
+        right: 80px;
+    }
+
+    .home .content h1 {
+        font-size: 3.5em;
+        line-height: 65px;
+    }
+
+    .home .content .hero-buttons {
+        gap: 50px;
+        margin-top: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .home .content {
+        width: calc(100% - 100px);
+        left: 50px;
+        padding-bottom: 80px;
+    }
+
+    .home .media-icons {
+        right: 40px;
+        top: 30%;
+        transform: translateY(-50%) scale(0.8);
+    }
+
+    .home .content h1 {
+        font-size: 4em;
+        line-height: 60px;
+        margin-bottom: 35px;
+        margin-top: 100px;
+        letter-spacing: 3px;
+    }
+
+    .home .content h3 {
+        font-size: 2.2em;
+        line-height: 45px;
+    }
+
+    .home .content p {
+        font-size: 1.5em;
+        max-width: 600px;
+    }
+
+    .home .content .hero-buttons {
+        gap: 25px;
+        margin-top: 100px;
+    }
+
+    .home .content .cta-button {
+        padding: 14px 25px;
+        font-size: 1.05em;
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home .content {
+        width: calc(100% - 60px);
+        left: 30px;
+        padding-bottom: 60px;
+    }
+
+    .home .media-icons {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        flex-direction: row;
+        gap: 25px;
+        align-self: flex-end;
+        margin-right: 30px;
+        margin-top: 80px;
+    }
+
+    .home .media-icons a:not(:last-child) {
+        margin-bottom: 0;
+    }
+
+    .home .media-icons a {
+        font-size: 2em;
+    }
+
+    .home .content h1 {
+        font-size: 3.5em;
+        line-height: 50px;
+        margin-bottom: 30px;
+        margin-top: 80px;
+        letter-spacing: 2px;
+    }
+
+    .home .content h3 {
+        font-size: 2em;
+        line-height: 40px;
+    }
+
+    .home .content p {
+        font-size: 1.4em;
+        line-height: 1.6;
+        max-width: 100%;
+    }
+
+    .home .content .hero-buttons {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 80px;
+    }
+
+    .home .content .cta-button {
+        padding: 12px 20px;
+        font-size: 1em;
+        min-width: 160px;
+    }
+
+    .admin-controls {
+        top: 15px;
+        right: 15px;
+    }
+
+    .admin-button {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+}

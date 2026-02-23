@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Workshop Inovação Digital",
+    "location": "Auditório Principal",
+    "address": "Rua da Inovação, nº 123",
+    "date": "2024-07-15",
+    "description": "Descubra as tendências mais recentes em transformação digital e inteligência artificial.",
+    "image": "https://picsum.photos/600/800?random=1"
+  },
+  {
+    "id": 2,
+    "title": "Conferência de Design",
+    "location": "Sala de Conferências",
+    "address": "Av. do Design, nº 456",
+    "date": "2024-08-20",
+    "description": "Explore os principios fundamentais do design moderno e user experience.",
+    "image": "https://picsum.photos/600/800?random=2"
+  },
+  {
+    "id": 3,
+    "title": "Hackathon de Desenvolvimento",
+    "location": "Laboratório Tech",
+    "address": "Av. Tecnológica, nº 789",
+    "date": "2024-09-10",
+    "description": "Desafio de 48 horas para desenvolvedores criarem soluções inovadoras.",
+    "image": "https://picsum.photos/600/800?random=3"
+  },
+  {
+    "id": 4,
+    "title": "Networking Profissional",
+    "location": "Espaço Social",
+    "address": "Rua Central, nº 321",
+    "date": "2024-10-05",
+    "description": "Conecte-se com profissionais da indústria e expanda sua rede de contatos.",
+    "image": "https://picsum.photos/600/800?random=4"
+  },
+  {
+    "id": 5,
+    "title": "Palestra sobre IA",
+    "location": "Auditório Sul",
+    "address": "Av. Futuro, nº 555",
+    "date": "2024-11-15",
+    "description": "Inteligência Artificial: Oportunidades e desafios para o futuro.",
+    "image": "https://picsum.photos/600/800?random=5"
+  }
+]

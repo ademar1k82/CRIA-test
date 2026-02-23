@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
-import '../styles/Footer.css';
+import './footer.css';
 import LegalModal from './LegalModal';
 import legalData from '../data/legal.json';
 
@@ -84,6 +84,28 @@ const Footer = () => {
 
   return (
     <footer id="footer" className="footer-container">
+      {/* Donation section commented out - to be developed later
+      <div id="donation" className="donation-header">
+        <h1 className="donation-title">Contribua para a mudança</h1>
+        <h2 className="donation-subtitle">Normalizemos a diferença</h2>
+        <p>Ao escolher apoiar o trabalho do CRIA, está a contribuir diretamente para a inclusão social e o desenvolvimento de projetos que transformam vidas.<br /><br />Um apoio que faz bem a todos.</p>
+      </div>
+
+      <div className="donation-section">
+        <a href="#donations" className="donation-image-link">
+          <img src="https://res.cloudinary.com/deoditzdz/image/upload/v1751624191/contribution_spkqni.jpg" alt="Donativos" />
+          <div className="donation-text">Donativos</div>
+        </a>
+        <a href="#associate" className="donation-image-link">
+          <img src="https://res.cloudinary.com/deoditzdz/image/upload/v1751624195/associate_ikjtuh.jpg" alt="Tornar-se Associado" />
+          <div className="donation-text">
+            <span className="small-text">Tornar-se</span>
+            <span className="main-text">Associado</span>
+          </div>
+        </a>
+      </div>
+      */}
+      
       <div className="participation-section">
         <h2 className="participation-title">PARTICIPA</h2>
         

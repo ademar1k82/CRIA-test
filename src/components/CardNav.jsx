@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { GoArrowUpRight } from 'react-icons/go'
+import { FiPlay, FiPause, FiVolume2, FiVolumeX } from 'react-icons/fi'
 import '../styles/CardNav.css'
 
 const CardNav = ({
@@ -16,9 +17,32 @@ const CardNav = ({
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [videoIsPlaying, setVideoIsPlaying] = useState(false)
+  const [videoIsMuted, setVideoIsMuted] = useState(false)
   const navRef = useRef(null)
   const cardsRef = useRef([])
   const tlRef = useRef(null)
+
+  const handlePlayVideo = () => {
+    if (window.videoControls?.play) {
+      window.videoControls.play()
+      setVideoIsPlaying(true)
+    }
+  }
+
+  const handlePauseVideo = () => {
+    if (window.videoControls?.pause) {
+      window.videoControls.pause()
+      setVideoIsPlaying(false)
+    }
+  }
+
+  const handleToggleMute = () => {
+    if (window.videoControls?.toggleMute) {
+      window.videoControls.toggleMute()
+      setVideoIsMuted(!videoIsMuted)
+    }
+  }
 
   const calculateHeight = () => {
     const navEl = navRef.current
@@ -132,7 +156,7 @@ const CardNav = ({
 
   return (
     <div className={`card-nav-container ${className}`}>
-      <nav ref={navRef} className={`card-nav ${isExpanded ? 'open' : ''}`} style={{ backgroundColor: baseColor }}>
+      <nav ref={navRef} className={`card-nav ${isExpanded ? 'open' : ''}`}>
         <div className="card-nav-top">
           <div
             className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''}`}
@@ -140,7 +164,6 @@ const CardNav = ({
             role="button"
             aria-label={isExpanded ? 'Close menu' : 'Open menu'}
             tabIndex={0}
-            style={{ color: menuColor || '#000' }}
           >
             <div className="hamburger-line" />
             <div className="hamburger-line" />
@@ -148,6 +171,23 @@ const CardNav = ({
 
           <div className="logo-container">
             {logo && <img src={logo} alt={logoAlt} className="logo" />}
+          </div>
+
+          <div className="video-controls">
+            <button
+              onClick={videoIsPlaying ? handlePauseVideo : handlePlayVideo}
+              className="video-control-btn"
+              aria-label={videoIsPlaying ? 'Pausar vídeo' : 'Reproduzir vídeo'}
+            >
+              {videoIsPlaying ? <FiPause size={26} strokeWidth={2.5} /> : <FiPlay size={26} strokeWidth={2.5} />}
+            </button>
+            <button
+              onClick={handleToggleMute}
+              className="video-control-btn"
+              aria-label={videoIsMuted ? 'Ligar som' : 'Desligar som'}
+            >
+              {videoIsMuted ? <FiVolumeX size={26} strokeWidth={2.5} /> : <FiVolume2 size={26} strokeWidth={2.5} />}
+            </button>
           </div>
 
           {/* <button
