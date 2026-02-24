@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import '../styles/LegalModal.css';
 
 const LegalModal = ({ isOpen, onClose, title, content }) => {
@@ -15,7 +16,7 @@ const LegalModal = ({ isOpen, onClose, title, content }) => {
 
   if (!isOpen) return null;
 
-  return (
+  const modal = (
     <div className={`blog-modal-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}>
       <div className="blog-modal-content" onClick={e => e.stopPropagation()}>
         <button className="blog-modal-close" onClick={onClose}>
@@ -38,6 +39,7 @@ const LegalModal = ({ isOpen, onClose, title, content }) => {
       </div>
     </div>
   );
-};
+
+  return createPortal(modal, document.body);};
 
 export default LegalModal;

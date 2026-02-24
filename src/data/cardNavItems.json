@@ -1,30 +1,32 @@
 [
   {
-    "label": "Sobre",
+    "label": "O que somos",
     "bgColor": "#0D0716",
     "textColor": "#fff",
     "links": [
-      { "label": "Empresa", "ariaLabel": "Sobre a Empresa" },
-      { "label": "Carreiras", "ariaLabel": "Carreiras" }
+      { "label": "Início", "ariaLabel": "Início", "href": "#landing-page" },
+      { "label": "Quem somos", "ariaLabel": "Quem somos", "href": "#about" },
+      { "label": "O que fazemos", "ariaLabel": "O que fazemos", "href": "#values" }
     ]
   },
   {
-    "label": "Projetos",
+    "label": "Como fazemos",
     "bgColor": "#170D27",
     "textColor": "#fff",
     "links": [
-      { "label": "Destaque", "ariaLabel": "Projetos em Destaque" },
-      { "label": "Casos", "ariaLabel": "Estudos de Caso" }
+      { "label": "Agenda", "ariaLabel": "Calendário de Eventos", "href": "#planner" },
+      { "label": "Em desenvolvimento", "ariaLabel": "Brevemente", "href": "#coming-soon" }
     ]
   },
   {
-    "label": "Contato",
+    "label": "Onde estamos",
     "bgColor": "#271E37",
     "textColor": "#fff",
     "links": [
-      { "label": "Email", "ariaLabel": "Email" },
-      { "label": "Twitter", "ariaLabel": "Twitter" },
-      { "label": "LinkedIn", "ariaLabel": "LinkedIn" }
+      { "label": "Email", "ariaLabel": "Email", "href": "#footer" },
+      { "label": "Facebook", "ariaLabel": "Facebook", "href": "https://www.facebook.com/CriaInclusaoSocial", "target": "_blank" },
+      { "label": "Instagram", "ariaLabel": "Instagram", "href": "https://www.instagram.com/cria_inclusaosocial", "target": "_blank" },
+      { "label": "LinkedIn", "ariaLabel": "LinkedIn", "href": "https://www.linkedin.com/company/cria-inclus%C3%A3o-social/", "target": "_blank" }
     ]
   }
 ]

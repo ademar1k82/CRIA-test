@@ -22,13 +22,25 @@ export default function App() {
         buttonTextColor="#fff"
         ease="power3.out"
       />
-      <LandingPage />
-      <About />
-      <Values />
-      <Planner />
+      <div id="landing-page">
+        <LandingPage />
+      </div>
+      <div id="about">
+        <About />
+      </div>
+      <div id="values">
+        <Values />
+      </div>
+      <div id="planner">
+        <Planner />
+      </div>
       {/* <Library /> */}
-      <ComingSoon />
-      <Footer />
+      <div id="coming-soon">
+        <ComingSoon />
+      </div>
+      <div id="footer">
+        <Footer />
+      </div>
     </div>
   )
 }

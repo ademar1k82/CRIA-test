@@ -85,7 +85,7 @@ const Footer = () => {
   return (
     <footer id="footer" className="footer-container">
       <div className="participation-section">
-        <h2 className="participation-title">PARTICIPA</h2>
+        <h1 className="participation-title">PARTICIPA</h1>
         
         <div className="participation-grid">
           <div className="participation-item">
