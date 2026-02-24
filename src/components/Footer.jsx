@@ -63,7 +63,7 @@ const Footer = () => {
         to_email: 'geral.cria2025@gmail.com',
         from_name: form.current.user_name.value || 'Sem nome',
         from_email: form.current.user_email.value || '',
-        user_message: form.current.subject.value || '',
+        subject: form.current.subject.value || '',
         reply_to: form.current.user_email.value || ''
       };
 
@@ -175,7 +175,7 @@ const Footer = () => {
             />
             <textarea
               name="subject"
-              placeholder="Assunto"
+              placeholder="Mensagem"
               required
               rows="4"
             ></textarea>
