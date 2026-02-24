@@ -116,7 +116,9 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
         repeat: -1,
         repeatDelay: 0,
         onRepeat: () => {
-          gsap.set(marqueeInnerRef.current, { x: 0 })
+          if (marqueeInnerRef.current) {
+            gsap.set(marqueeInnerRef.current, { x: 0 })
+          }
         }
       })
     }

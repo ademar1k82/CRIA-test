@@ -6,7 +6,7 @@ import legalData from '../data/legal.json';
 
 // Estas constantes permanecem as mesmas pois são da sua conta EmailJS
 const PUBLIC_KEY = "KCAP3I17jevQl-ua0";
-const SERVICE_ID = "service_m76ic37";
+const SERVICE_ID = "service_fayzypf";
 // Atualize este ID com o novo template que você criar para o formulário de contato
 const TEMPLATE_ID = "template_52h49gg"; // Substitua pelo ID do novo template
 
@@ -60,12 +60,14 @@ const Footer = () => {
       }
 
       const templateParams = {
-        from_name: form.current.user_name.value,
-        from_email: form.current.user_email.value,
-        subject: form.current.subject.value,
-        to_name: 'CRIA',
-        reply_to: form.current.user_email.value
+        to_email: 'geral.cria2025@gmail.com',
+        from_name: form.current.user_name.value || 'Sem nome',
+        from_email: form.current.user_email.value || '',
+        user_message: form.current.subject.value || '',
+        reply_to: form.current.user_email.value || ''
       };
+
+      console.log('Enviando com parâmetros:', templateParams);
 
       const response = await emailjs.send(
         SERVICE_ID,
@@ -76,9 +78,20 @@ const Footer = () => {
       console.log('SUCCESS!', response.status, response.text);
       setMessage({ text: 'Mensagem enviada com sucesso!', type: 'success' });
       form.current.reset();
+      setTimeout(() => setMessage({ text: '', type: '' }), 5000);
     } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
-      setMessage({ text: 'Erro ao enviar mensagem. Tente novamente.', type: 'error' });
+      console.error('Erro detalhado ao enviar mensagem:', error);  
+      let errorMsg = error.message || 'Erro desconhecido';
+      
+      if (error.text?.includes('insufficient authentication scopes')) {
+        errorMsg = 'Permissões insuficientes no Gmail. Reconecte a conta no EmailJS.';
+      } else if (error.text?.includes('Invalid grant')) {
+        errorMsg = 'Autorização expirada. Reconecte a conta Gmail no EmailJS.';
+      } else if (error.text) {
+        errorMsg = error.text;
+      }
+      
+      setMessage({ text: `Erro: ${errorMsg}`, type: 'error' });
     }
   };
 
