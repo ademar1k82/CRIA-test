@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cria-inclusaosocial.pt/sitemap.xml
+Host: cria-inclusaosocial.pt
